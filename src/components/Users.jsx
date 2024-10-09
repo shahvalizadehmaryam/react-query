@@ -6,11 +6,16 @@ const UsersPage = () => {
     console.log("fetching...");
     return axios.get("https://jsonplaceholder.typicode.com/users");
   };
+  const onSuccess = (data) => console.log("success", data);
+  const onError = (error) => console.log("error", error);
 
   const { data, isLoading, isError, error, isFetching, refetch } = useQuery(
     ["users"],
     fetchUsers,
-    { enabled: false }
+    {
+      onSuccess,
+      onError,
+    }
   );
   console.log({ data, isLoading, isError, error, isFetching });
   if (isLoading) <h1>Loading...</h1>;
