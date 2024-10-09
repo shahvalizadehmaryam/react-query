@@ -1,18 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useUserDetails } from "../hooks/queries";
 
 function UserDetails() {
   const { id } = useParams();
-  const fetchUserDetail = ({ queryKey }) => {
-    return axios.get(
-      `https://jsonplaceholder.typicode.com/users/${queryKey[1]}`
-    );
-  };
-  const { data, isLoading, isFetching } = useQuery(
-    ["users", id],
-    fetchUserDetail
-  );
+
+  const { data, isLoading, isFetching } = useUserDetails(id);
   console.log(data);
   return (
     <div>
