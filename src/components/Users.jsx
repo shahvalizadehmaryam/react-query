@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const UsersPage = () => {
   const fetchUsers = () => {
@@ -26,7 +27,9 @@ const UsersPage = () => {
       <button onClick={refetch}>Fetch</button>
       {isLoading && isFetching && <h1>Loading...</h1>}
       {data?.data.map((i) => (
-        <p key={i.id}>{i.name}</p>
+        <Link key={i.id} to={`/users/${i.id}`}>
+         <p> {i.name}</p>
+        </Link>
       ))}
     </div>
   );
